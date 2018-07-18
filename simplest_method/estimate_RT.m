@@ -12,6 +12,7 @@ XYZi = [Xi; Yi; Zi; ones(size(Xi))]; % q
 R = rotnx(75)*rotny(45)*rotnz(45);
 T = [2; 3; -1];
 
+disp('Actual Transformation');
 Trans = [R T; 0 0 0 1]
 XYZj = Trans*XYZi; 
 figure(1)
@@ -38,7 +39,9 @@ midMat(end, end) = det(V*U');
 R = V*midMat*U';
 
 t = meanXYZj(1:3,:) - R*meanXYZi(1:3, :);
+disp('Estimated Transformation');
 Trans_est = [R, t; 0 0 0 1]
 
+disp('Product of Actual and inverse of Estimated Transformation');
 product = Trans*inv(Trans_est)
 
